@@ -21,4 +21,3 @@ message Body {
     int32 contentType = 2;// 消息内容类型
     string data = 3;// 扩展字段，以key/value形式存储的json字符串
 }
-

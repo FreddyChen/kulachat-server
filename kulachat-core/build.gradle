@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	testImplementation group: 'junit', name: 'junit', version: '4.12'
+	testImplementation group: 'junit', name: 'junit', version: "$junit_version"
 	implementation "org.springframework.boot:spring-boot-starter-web:$spring_version"
 	implementation "org.springframework.boot:spring-boot-starter-jdbc:$spring_version"
 	implementation "org.springframework.boot:spring-boot-starter-data-redis:$spring_version"
@@ -15,6 +15,10 @@ dependencies {
 	implementation "mysql:mysql-connector-java:$mysql_version"
 	implementation project(':kulachat-common')
 	implementation project(':kulachat-ims')
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
 }
 
 test {
