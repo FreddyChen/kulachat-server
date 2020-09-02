@@ -3,6 +3,8 @@ package com.freddy.kulachat.ims.nio.websocket;
 import com.freddy.kulachat.ims.bean.IMSMsg;
 import com.freddy.kulachat.ims.config.IMSOptions;
 import com.freddy.kulachat.ims.interf.IMSInterface;
+import com.freddy.kulachat.ims.listener.IMSMsgReceivedListener;
+import com.freddy.kulachat.ims.nio.tcp.NioTCPIMS;
 
 /**
  * @author FreddyChen
@@ -13,18 +15,24 @@ import com.freddy.kulachat.ims.interf.IMSInterface;
  */
 public class NioWebSocketIMS implements IMSInterface {
 
+    private NioWebSocketIMS() {
+    }
+
+    public static NioWebSocketIMS getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private static final class SingletonHolder {
+        private static final NioWebSocketIMS INSTANCE = new NioWebSocketIMS();
+    }
+
     @Override
-    public IMSInterface init(IMSOptions options) {
-        return null;
+    public boolean init(IMSOptions options, IMSMsgReceivedListener msgReceivedListener) {
+        return true;
     }
 
     @Override
     public void start() {
-
-    }
-
-    @Override
-    public void stop() {
 
     }
 

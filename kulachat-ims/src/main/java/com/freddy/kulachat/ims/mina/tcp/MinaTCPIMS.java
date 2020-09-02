@@ -3,6 +3,8 @@ package com.freddy.kulachat.ims.mina.tcp;
 import com.freddy.kulachat.ims.bean.IMSMsg;
 import com.freddy.kulachat.ims.config.IMSOptions;
 import com.freddy.kulachat.ims.interf.IMSInterface;
+import com.freddy.kulachat.ims.listener.IMSMsgReceivedListener;
+import com.freddy.kulachat.ims.netty.websocket.NettyWebSocketIMS;
 
 /**
  * @author FreddyChen
@@ -13,18 +15,24 @@ import com.freddy.kulachat.ims.interf.IMSInterface;
  */
 public class MinaTCPIMS implements IMSInterface {
 
+    private MinaTCPIMS() {
+    }
+
+    public static MinaTCPIMS getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private static final class SingletonHolder {
+        private static final MinaTCPIMS INSTANCE = new MinaTCPIMS();
+    }
+
     @Override
-    public IMSInterface init(IMSOptions options) {
-        return null;
+    public boolean init(IMSOptions options, IMSMsgReceivedListener msgReceivedListener) {
+        return true;
     }
 
     @Override
     public void start() {
-
-    }
-
-    @Override
-    public void stop() {
 
     }
 

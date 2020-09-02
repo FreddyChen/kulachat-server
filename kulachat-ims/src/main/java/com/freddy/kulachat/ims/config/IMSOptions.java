@@ -8,20 +8,25 @@ package com.freddy.kulachat.ims.config;
  * @github https://github.com/FreddyChen
  */
 public class IMSOptions {
+
+    private ImplementationMode implementationMode;// 实现方式
     private CommunicationProtocol communicationProtocol;// 通信协议
     private TransportProtocol transportProtocol;// 传输协议
-    private int tcpPort;// TCP端口号
-    private int webSocketPort;// WebSocket端口号
+    private int port;// 端口号
 
     private IMSOptions(Builder builder) {
-        if(builder == null) {
+        if (builder == null) {
             return;
         }
 
+        this.implementationMode = builder.implementationMode;
         this.communicationProtocol = builder.communicationProtocol;
         this.transportProtocol = builder.transportProtocol;
-        this.tcpPort = builder.tcpPort;
-        this.webSocketPort = builder.webSocketPort;
+        this.port = builder.port;
+    }
+
+    public ImplementationMode getImplementationMode() {
+        return implementationMode;
     }
 
     public CommunicationProtocol getCommunicationProtocol() {
@@ -32,27 +37,49 @@ public class IMSOptions {
         return transportProtocol;
     }
 
-    public int getTcpPort() {
-        return tcpPort;
+    public int getPort() {
+        return port;
     }
 
-    public int getWebSocketPort() {
-        return webSocketPort;
+    @Override
+    public String toString() {
+        return "IMSOptions\n{" +
+                "\n\timplementationMode=" + implementationMode +
+                "\n\tcommunicationProtocol=" + communicationProtocol +
+                "\n\ttransportProtocol=" + transportProtocol +
+                "\n\tport=" + port +
+                "\n}";
     }
 
     public static class Builder {
+
+        private ImplementationMode implementationMode;// 实现方式
         private CommunicationProtocol communicationProtocol;// 通信协议
         private TransportProtocol transportProtocol;// 传输协议
-        private int tcpPort;// TCP端口号
-        private int webSocketPort;// WebSocket端口号
+        private int port;// 端口号
 
         public Builder() {
-            this.tcpPort = IMSConfig.TCP_PORT;
-            this.webSocketPort = IMSConfig.WEBSOCKET_PORT;
+            this.implementationMode = ImplementationMode.Netty;
+        }
+
+        public Builder setImplementationMode(ImplementationMode implementationMode) {
+            this.implementationMode = implementationMode;
+            return this;
         }
 
         public Builder setCommunicationProtocol(CommunicationProtocol communicationProtocol) {
             this.communicationProtocol = communicationProtocol;
+            if(this.port == 0) {
+                switch (communicationProtocol) {
+                    case TCP:
+                        this.port = IMSConfig.TCP_PORT;
+                        break;
+
+                    case WebSocket:
+                        this.port = IMSConfig.WEBSOCKET_PORT;
+                        break;
+                }
+            }
             return this;
         }
 
@@ -61,13 +88,8 @@ public class IMSOptions {
             return this;
         }
 
-        public Builder setTCPPort(int tcpPort) {
-            this.tcpPort = tcpPort;
-            return this;
-        }
-
-        public Builder setWebSocketPort(int webSocketPort) {
-            this.webSocketPort = webSocketPort;
+        public Builder setPort(int port) {
+            this.port = port;
             return this;
         }
 

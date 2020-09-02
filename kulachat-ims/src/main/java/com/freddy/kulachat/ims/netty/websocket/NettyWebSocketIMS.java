@@ -3,6 +3,8 @@ package com.freddy.kulachat.ims.netty.websocket;
 import com.freddy.kulachat.ims.bean.IMSMsg;
 import com.freddy.kulachat.ims.config.IMSOptions;
 import com.freddy.kulachat.ims.interf.IMSInterface;
+import com.freddy.kulachat.ims.listener.IMSMsgReceivedListener;
+import com.freddy.kulachat.ims.netty.tcp.NettyTCPIMS;
 
 /**
  * @author FreddyChen
@@ -13,18 +15,25 @@ import com.freddy.kulachat.ims.interf.IMSInterface;
  * @desc 基于Netty实现的WebSocket协议客户端
  */
 public class NettyWebSocketIMS implements IMSInterface {
+
+    private NettyWebSocketIMS() {
+    }
+
+    public static NettyWebSocketIMS getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private static final class SingletonHolder {
+        private static final NettyWebSocketIMS INSTANCE = new NettyWebSocketIMS();
+    }
+
     @Override
-    public IMSInterface init(IMSOptions options) {
-        return null;
+    public boolean init(IMSOptions options, IMSMsgReceivedListener msgReceivedListener) {
+        return true;
     }
 
     @Override
     public void start() {
-
-    }
-
-    @Override
-    public void stop() {
 
     }
 

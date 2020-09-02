@@ -3,6 +3,17 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 }
 
+configurations.all {
+	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+		def requested = details.requested
+		if(requested.group == 'org.slfj') {
+			if(requested.name == "slf4j-api") {
+				details.useVersion("$slf4j_version")
+			}
+		}
+	}
+}
+
 dependencies {
 	testImplementation group: 'junit', name: 'junit', version: "$junit_version"
 	implementation "org.springframework.boot:spring-boot-starter-web:$spring_version"
@@ -14,7 +25,9 @@ dependencies {
 	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
 	implementation "mysql:mysql-connector-java:$mysql_version"
 	implementation project(':kulachat-common')
-	implementation project(':kulachat-ims')
+	implementation (project(':kulachat-ims')) {
+		exclude group: 'org.slf4j', module: 'slf4j-api'
+	}
 }
 
 tasks.withType(JavaCompile) {

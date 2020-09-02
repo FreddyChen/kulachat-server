@@ -2,6 +2,7 @@ package com.freddy.kulachat.ims.interf;
 
 import com.freddy.kulachat.ims.bean.IMSMsg;
 import com.freddy.kulachat.ims.config.IMSOptions;
+import com.freddy.kulachat.ims.listener.IMSMsgReceivedListener;
 
 /**
  * @author FreddyChen
@@ -12,6 +13,10 @@ import com.freddy.kulachat.ims.config.IMSOptions;
  * @desc 不同的服务端协议实现此接口即可，例：
  * {@link com.freddy.kulachat.ims.netty.tcp.NettyTCPIMS}
  * {@link com.freddy.kulachat.ims.netty.websocket.NettyWebSocketIMS}
+ * {@link com.freddy.kulachat.ims.nio.tcp.NioTCPIMS}
+ * {@link com.freddy.kulachat.ims.nio.websocket.NioWebSocketIMS}
+ * {@link com.freddy.kulachat.ims.mina.tcp.MinaTCPIMS}
+ * {@link com.freddy.kulachat.ims.mina.websocket.MinaWebSocketIMS}
  */
 public interface IMSInterface {
 
@@ -21,17 +26,12 @@ public interface IMSInterface {
      * @param options
      * @return
      */
-    IMSInterface init(IMSOptions options);
+    boolean init(IMSOptions options, IMSMsgReceivedListener msgReceivedListener);
 
     /**
      * 启动IMS
      */
     void start();
-
-    /**
-     * 停止IMS
-     */
-    void stop();
 
     /**
      * 发送消息

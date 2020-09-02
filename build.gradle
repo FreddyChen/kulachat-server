@@ -6,6 +6,7 @@ buildscript {
     ext.protobuf_plugin_version = '0.8.13'
     ext.netty_version = '4.1.42.Final'
     ext.junit_version = '4.12'
+    ext.slf4j_version = '1.7.30'
 
     repositories {
         mavenCentral()

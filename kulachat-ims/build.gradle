@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation "com.google.protobuf:protobuf-java:$protobuf_version"
     implementation "io.netty:netty-all:$netty_version"
+    implementation "org.slf4j:slf4j-api:$slf4j_version"
     testImplementation group: 'junit', name: 'junit', version: "$junit_version"
 }
 
