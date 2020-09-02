@@ -13,6 +13,7 @@ dependencies {
 	}
 	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
 	implementation "mysql:mysql-connector-java:$mysql_version"
+	implementation project(':kulachat-common')
 	implementation project(':kulachat-ims')
 }
 

@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/kulachat-common" />
             <option value="$PROJECT_DIR$/kulachat-core" />
             <option value="$PROJECT_DIR$/kulachat-ims" />
           </set>

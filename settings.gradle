@@ -1,4 +1,5 @@
 rootProject.name = 'kulachat-server'
 include 'kulachat-core'
 include 'kulachat-ims'
+include 'kulachat-common'
 
