@@ -26,7 +26,7 @@ public class KulaChatCoreApplication {
     private static void startIMS() {
         IMSOptions options = new IMSOptions.Builder()
                 .setImplementationMode(ImplementationMode.Netty)
-                .setCommunicationProtocol(CommunicationProtocol.TCP)
+                .setCommunicationProtocol(CommunicationProtocol.WebSocket)
                 .setTransportProtocol(TransportProtocol.Protobuf)
                 .build();
 

@@ -59,6 +59,7 @@ public class NettyTCPIMS implements IMSInterface {
         this.mIMSOptions = options;
         this.mIMSMsgReceivedListener = msgReceivedListener;
         initialized = true;
+        isClosed = false;
         return true;
     }
 
@@ -79,6 +80,7 @@ public class NettyTCPIMS implements IMSInterface {
                 logger.debug("NettyTCPIMS启动失败");
             }
 
+            future.awaitUninterruptibly();
             channel.closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,6 +117,7 @@ public class NettyTCPIMS implements IMSInterface {
     public void release() {
         closeChannel();
         closeServerBootstrap();
+        isClosed = true;
     }
 
     /**
@@ -170,6 +173,8 @@ public class NettyTCPIMS implements IMSInterface {
                     e.printStackTrace();
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             channel = null;
         }
