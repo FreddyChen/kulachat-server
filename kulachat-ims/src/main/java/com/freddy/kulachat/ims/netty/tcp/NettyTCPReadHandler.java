@@ -5,6 +5,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+
 /**
  * @author FreddyChen
  * @name
@@ -24,11 +27,15 @@ public class NettyTCPReadHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.debug("channelActive() ctx = " + ctx);
+        InetSocketAddress address = (InetSocketAddress) ctx.channel().remoteAddress();
+        logger.debug(String.format("客户端【%1$s:%2$d】已连接)", address.getHostName(), address.getPort()));
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         logger.warn("channelInactive() ctx = " + ctx);
+        InetSocketAddress address = (InetSocketAddress) ctx.channel().remoteAddress();
+        logger.debug(String.format("客户端【%1$s:%2$d】已断开连接)", address.getHostName(), address.getPort()));
     }
 
     @Override
