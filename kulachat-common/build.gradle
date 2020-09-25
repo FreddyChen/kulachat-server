@@ -1,3 +1,8 @@
+
+dependencies {
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+}
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }

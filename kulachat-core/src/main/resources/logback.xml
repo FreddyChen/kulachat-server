@@ -10,7 +10,7 @@
     <!--设置日志输出为文件-->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>logFile.log</File>
-        <rollingPolicy  class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>logFile.%d{yyyy-MM-dd_HH-mm}.log.zip</FileNamePattern>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -20,6 +20,6 @@
     <root>
         <level value="DEBUG"/>
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
+<!--        <appender-ref ref="FILE"/>-->
     </root>
 </configuration>

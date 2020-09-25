@@ -24,6 +24,9 @@ dependencies {
 	}
 	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
 	implementation "mysql:mysql-connector-java:$mysql_version"
+	implementation "org.springframework.boot:spring-boot-starter-aop:$aop_version"
+	implementation "org.springframework.boot:spring-boot-starter-data-redis:$redis_version"
+	implementation "com.auth0:java-jwt:$jwt_version"
 	implementation project(':kulachat-common')
 	implementation (project(':kulachat-ims')) {
 		exclude group: 'org.slf4j', module: 'slf4j-api'

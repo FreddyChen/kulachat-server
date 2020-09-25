@@ -5,13 +5,15 @@ import com.freddy.kulachat.ims.config.CommunicationProtocol;
 import com.freddy.kulachat.ims.config.IMSOptions;
 import com.freddy.kulachat.ims.config.ImplementationMode;
 import com.freddy.kulachat.ims.config.TransportProtocol;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})// todo 先不要自动配置DataSource
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})// todo 先不要自动配置DataSource
+@SpringBootApplication
+@MapperScan(basePackages = "com.freddy.kulachat.core.dao")
 public class KulaChatCoreApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(KulaChatCoreApplication.class);

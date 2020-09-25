@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.freddy.kulachat.core.dao.UserDao">
+
+    <!--    <resultMap id="UserResultMap" type="com.freddy.kulachat.core.entity.User">-->
+    <!--        <id column="user_id" property="userId" jdbcType="BIGINT" />-->
+    <!--        <result column="phone" property="phone" jdbcType="VARCHAR" />-->
+    <!--        <result column="nickname" property="nickname" jdbcType="VARCHAR" />-->
+    <!--        <result column="avatar" property="avatar" jdbcType="VARCHAR" />-->
+    <!--        <result column="gender" property="gender" jdbcType="INTEGER" />-->
+    <!--        <result column="birthday" property="birthday" jdbcType="DATE" />-->
+    <!--        <result column="signature" property="signature" jdbcType="VARCHAR" />-->
+    <!--        <result column="province" property="province" jdbcType="VARCHAR" />-->
+    <!--        <result column="city" property="city" jdbcType="VARCHAR" />-->
+    <!--    </resultMap>-->
+
+    <sql id="TABLE_NAME">
+        user
+    </sql>
+
+    <sql id="ALL_COLUMN">
+        user_id, phone, nickname, avatar, gender, birthday, signature, province, city, is_completed_info
+    </sql>
+
+    <!-- 根据手机号查询用户 -->
+    <select id="queryUserByPhone" resultType="User" parameterType="String">
+        select
+        <include refid="ALL_COLUMN"/>
+        from
+        <include refid="TABLE_NAME"/>
+        where phone = ${phone}
+    </select>
+
+    <!-- 注册用户 -->
+    <insert id="register" parameterType="User">
+        <selectKey keyProperty="userId" order="AFTER" resultType="Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        <include refid="TABLE_NAME"/>(phone)
+        values
+        (#{phone})
+    </insert>
+</mapper>
