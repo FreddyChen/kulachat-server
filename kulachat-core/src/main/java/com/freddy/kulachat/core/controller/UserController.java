@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -41,6 +42,11 @@ public class UserController {
     private RedisTemplateService redisTemplateService;
     private static final String DEFAULT_VERIFICATION_CODE = "000000";
 
+    @RequestMapping(value = NetworkConfig.FUNC_USER_GET_VERIFY_CODE, method = RequestMethod.POST)
+    public RetResult getVerifyCode(@RequestBody Map<String, Object> params) {
+        return RetResponse.onSucceed();
+    }
+
     @RequestMapping(value = NetworkConfig.FUNC_USER_LOGIN, method = RequestMethod.POST)
     public RetResult login(@RequestBody Map<String, Object> params) {
         if (MapUtil.isEmpty(params)) {
@@ -55,7 +61,7 @@ public class UserController {
             return RetResponse.onFailed(RetCode.ILLEGAL_PHONE);
         }
 
-        String code = (String) params.get(NetworkConfig.PARAM_USER_CODE);
+        String code = (String) params.get(NetworkConfig.PARAM_USER_VERIFY_CODE);
         if (StringUtil.isEmpty(code)) {
             return RetResponse.onFailed(RetCode.VERIFICATION_CODE_IS_EMPTY);
         }

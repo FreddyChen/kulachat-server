@@ -12,7 +12,7 @@ public enum RetCode {
     SUCCEED(0, "succeed"),
     FAILED(1, "failed"),
     PARAMS_IS_EMPTY(1001, "参数为空"),
-    PHONE_IS_EMPTY(1002, "参数为空"),
+    PHONE_IS_EMPTY(1002, "手机号为空"),
     ILLEGAL_PHONE(1003, "手机号不合法"),
     VERIFICATION_CODE_IS_EMPTY(1004, "验证码为空"),
     VERIFICATION_CODE_IS_INCORRECT(1005, "验证码不正确"),
@@ -22,18 +22,18 @@ public enum RetCode {
     TOKEN_INVALID(2004, "token无效，请重新登录");
 
     private final int code;
-    private final String msg;
+    private final String message;
 
-    RetCode(int code, String msg) {
+    RetCode(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     public int getCode() {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 }

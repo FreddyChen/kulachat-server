@@ -15,7 +15,7 @@ public class RetResponse {
 
     public static <T> RetResult<T> onSucceed(T data) {
         RetResult<T> result = new RetResult<>();
-        result.setCode(RetCode.SUCCEED.getCode()).setMsg(RetCode.SUCCEED.getMsg());
+        result.setCode(RetCode.SUCCEED.getCode()).setMsg(RetCode.SUCCEED.getMessage());
         if(data != null) {
             result.setData(data);
         }
@@ -24,11 +24,11 @@ public class RetResponse {
     }
 
     public static RetResult onFailed() {
-        return RetResponse.onFailed(RetCode.FAILED.getCode(), RetCode.FAILED.getMsg());
+        return RetResponse.onFailed(RetCode.FAILED.getCode(), RetCode.FAILED.getMessage());
     }
 
     public static RetResult onFailed(int errCode) {
-        return RetResponse.onFailed(errCode, RetCode.FAILED.getMsg());
+        return RetResponse.onFailed(errCode, RetCode.FAILED.getMessage());
     }
 
     public static RetResult onFailed(String errMsg) {
@@ -39,7 +39,7 @@ public class RetResponse {
         if(retCode == null) {
             return RetResponse.onFailed();
         }
-        return RetResponse.onFailed(retCode.getCode(), retCode.getMsg());
+        return RetResponse.onFailed(retCode.getCode(), retCode.getMessage());
     }
 
     public static RetResult onFailed(int errCode, String errMsg) {

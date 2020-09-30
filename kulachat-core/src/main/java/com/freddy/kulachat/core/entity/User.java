@@ -21,7 +21,10 @@ public class User {
     private String signature;
     private String province;
     private String city;
-    private boolean isCompletedInfo;
+    private int completedInfo;
+
+    private static final int IS_COMPLETED_INFO = 1;
+    private static final int UN_COMPLETED_INFO = 0;
 
     public Long getUserId() {
         return userId;
@@ -95,12 +98,20 @@ public class User {
         this.city = city;
     }
 
+    public int getCompletedInfo() {
+        return completedInfo;
+    }
+
+    public void setCompletedInfo(int completedInfo) {
+        this.completedInfo = completedInfo;
+    }
+
     public boolean isCompletedInfo() {
-        return isCompletedInfo;
+        return this.completedInfo == IS_COMPLETED_INFO;
     }
 
     public void setCompletedInfo(boolean completedInfo) {
-        isCompletedInfo = completedInfo;
+        setCompletedInfo(completedInfo ? IS_COMPLETED_INFO : UN_COMPLETED_INFO);
     }
 
     @Override
@@ -115,7 +126,7 @@ public class User {
                 ", signature='" + signature + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
-                ", isCompletedInfo=" + isCompletedInfo +
+                ", completedInfo=" + completedInfo +
                 '}';
     }
 }

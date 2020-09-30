@@ -19,7 +19,7 @@
     </sql>
 
     <sql id="ALL_COLUMN">
-        user_id, phone, nickname, avatar, gender, birthday, signature, province, city, is_completed_info
+        user_id, phone, nickname, avatar, gender, birthday, signature, province, city, completed_info
     </sql>
 
     <!-- 根据手机号查询用户 -->
