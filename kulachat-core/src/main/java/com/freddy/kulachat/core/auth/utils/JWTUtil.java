@@ -3,10 +3,8 @@ package com.freddy.kulachat.core.auth.utils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.freddy.kulachat.core.config.NetworkConfig;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +19,7 @@ public class JWTUtil {
 
     // todo 不使用JWT的过期机制，直接利用Redis的过期机制即可
     public static final long EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000L;// token过期时间，单位：毫秒
+//    public static final long EXPIRE_TIME = 60 * 1000L;// token过期时间，单位：毫秒
     private static final String TOKEN_SECRET = "kulachattokensecret";// JWT私钥
 
     /**

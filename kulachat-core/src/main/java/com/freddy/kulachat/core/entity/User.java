@@ -110,9 +110,9 @@ public class User {
         return this.completedInfo == IS_COMPLETED_INFO;
     }
 
-    public void setCompletedInfo(boolean completedInfo) {
-        setCompletedInfo(completedInfo ? IS_COMPLETED_INFO : UN_COMPLETED_INFO);
-    }
+//    public void setCompletedInfo(boolean completedInfo) {
+//        setCompletedInfo(completedInfo ? IS_COMPLETED_INFO : UN_COMPLETED_INFO);
+//    }
 
     @Override
     public String toString() {

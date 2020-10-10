@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @author FreddyChen
@@ -47,6 +48,12 @@ public class ControllerLogAspect {
         logger.info("Class Method   : {}.{}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName());
         // 打印请求的 IP
         logger.info("IP             : {}", request.getRemoteAddr());
+        // 打印请求头
+        Enumeration<String> headers = request.getHeaderNames();
+        while(headers.hasMoreElements()) {
+            String header = headers.nextElement();
+            logger.info("Header         : {}--->{}", header, request.getHeader(header));
+        }
         // 打印请求入参
         logger.info("Request Args   : {}", JsonMapper.toJSONString(point.getArgs()));
         logger.info("\n");
