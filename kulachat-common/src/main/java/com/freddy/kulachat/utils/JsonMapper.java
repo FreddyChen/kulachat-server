@@ -1,6 +1,7 @@
 package com.freddy.kulachat.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -26,7 +27,7 @@ public class JsonMapper {
      * @return
      */
     public static String toJSONString(Object obj) {
-        if(obj == null) return null;
+        if (obj == null) return null;
         try {
             return mapper.writeValueAsString(obj);
         } catch (Exception e) {
@@ -37,14 +38,29 @@ public class JsonMapper {
     }
 
     public static <T> T parseObject(String json, Class<T> cls) {
-        if(StringUtil.isEmpty(json)) return null;
+        if (StringUtil.isEmpty(json)) return null;
         try {
             return mapper.readValue(json, cls);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    public static <T> T parseObject(String json, JavaType javaType) {
+        if (StringUtil.isEmpty(json)) return null;
+        try {
+            return mapper.readValue(json, javaType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static JavaType getCollectionType(Class<?> collectionCls, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(collectionCls, elementClasses);
     }
 
     public static void main(String[] args) {

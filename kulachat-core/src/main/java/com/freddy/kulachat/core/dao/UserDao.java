@@ -19,8 +19,21 @@ public interface UserDao {
     User queryUserByPhone(String phone);
 
     /**
+     * 根据用户id查询用户
+     * @param userId
+     * @return
+     */
+    User queryUserByUserId(Long userId);
+
+    /**
      * 注册用户
      * @param user
      */
     void register(User user);
+
+    /**
+     * 完善资料
+     * @param user
+     */
+    void completeInfo(User user);
 }

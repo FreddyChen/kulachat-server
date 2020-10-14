@@ -11,6 +11,8 @@ buildscript {
     ext.jackson_version = '2.9.10.6'
     ext.redis_version = '2.3.4.RELEASE'
     ext.jwt_version = '3.10.3'
+    ext.aliyun_core_version = '4.4.6'
+    ext.aliyun_sts_version = '3.0.0'
 
     repositories {
         mavenCentral()

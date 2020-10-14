@@ -1,6 +1,8 @@
 package com.freddy.kulachat.core.controller;
 
+import com.freddy.kulachat.core.auth.RequestUser;
 import com.freddy.kulachat.core.auth.annotation.AuthTokenAnnotation;
+import com.freddy.kulachat.core.auth.annotation.RequestUserAnnotation;
 import com.freddy.kulachat.core.auth.utils.JWTUtil;
 import com.freddy.kulachat.core.config.NetworkConfig;
 import com.freddy.kulachat.core.entity.User;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -44,11 +45,13 @@ public class UserController {
 
     @RequestMapping(value = NetworkConfig.FUNC_USER_GET_VERIFY_CODE, method = RequestMethod.POST)
     public RetResult getVerifyCode(@RequestBody Map<String, Object> params) {
+        logger.debug("getVerifyCode() params = " + params);
         return RetResponse.onSucceed();
     }
 
     @RequestMapping(value = NetworkConfig.FUNC_USER_LOGIN, method = RequestMethod.POST)
     public RetResult login(@RequestBody Map<String, Object> params) {
+        logger.debug("login() params = " + params);
         if (MapUtil.isEmpty(params)) {
             return RetResponse.onFailed(RetCode.PARAMS_IS_EMPTY);
         }
@@ -96,6 +99,62 @@ public class UserController {
     @AuthTokenAnnotation
     @RequestMapping(value = "/test.action", method = RequestMethod.POST)
     public RetResult test() {
+        return RetResponse.onSucceed();
+    }
+
+    @AuthTokenAnnotation
+    @RequestMapping(value = NetworkConfig.FUNC_USER_COMPLETE_INFO, method = RequestMethod.POST)
+    public RetResult completeInfo(@RequestUserAnnotation RequestUser requestUser, @RequestBody Map<String, Object> params) {
+        logger.debug("completeInfo() requestUser = " + requestUser + "\tparams = " + params);
+//        User user = userService.queryUserByUserId(requestUser.getUserId());
+//        if(user == null) {
+//            return RetResponse.onFailed();
+//        }
+
+        User user = new User();
+        user.setUserId(requestUser.getUserId());
+
+        String nickname = (String) params.get(NetworkConfig.PARAM_USER_NICKNAME);
+        if(StringUtil.isNotEmpty(nickname)) {
+            user.setNickname(nickname);
+        }
+
+        String avatar = (String) params.get(NetworkConfig.PARAM_USER_AVATAR);
+        if(StringUtil.isNotEmpty(avatar)) {
+            user.setAvatar(avatar);
+        }
+
+        int gender = (int) params.get(NetworkConfig.PARAM_USER_GENDER);
+        if(gender != User.GENDER_UNKNOWN) {
+            user.setGender(gender);
+        }
+
+        String birthday = (String) params.get(NetworkConfig.PARAM_USER_BIRTHDAY);
+        if(StringUtil.isNotEmpty(birthday)) {
+            user.setBirthday(birthday);
+        }
+
+        String province = (String) params.get(NetworkConfig.PARAM_USER_PROVINCE);
+        if(StringUtil.isNotEmpty(province)) {
+            user.setProvince(province);
+        }
+
+        String city = (String) params.get(NetworkConfig.PARAM_USER_CITY);
+        if(StringUtil.isNotEmpty(city)) {
+            user.setCity(city);
+        }
+
+        String area = (String) params.get(NetworkConfig.PARAM_USER_AREA);
+        if(StringUtil.isNotEmpty(area)) {
+            user.setArea(area);
+        }
+
+        String signature = (String) params.get(NetworkConfig.PARAM_USER_SIGNATURE);
+        if(StringUtil.isNotEmpty(signature)) {
+            user.setSignature(signature);
+        }
+
+        userService.completeInfo(user);
         return RetResponse.onSucceed();
     }
 }

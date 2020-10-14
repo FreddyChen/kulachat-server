@@ -23,7 +23,15 @@ public class UserService {
         return userDao.queryUserByPhone(phone);
     }
 
+    public User queryUserByUserId(Long userId) {
+        return userDao.queryUserByUserId(userId);
+    }
+
     public void register(User user) {
         userDao.register(user);
+    }
+
+    public void completeInfo(User user) {
+        userDao.completeInfo(user);
     }
 }

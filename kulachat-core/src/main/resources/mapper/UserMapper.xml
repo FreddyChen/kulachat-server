@@ -19,7 +19,7 @@
     </sql>
 
     <sql id="ALL_COLUMN">
-        user_id, phone, nickname, avatar, gender, birthday, signature, province, city, completed_info
+        user_id, phone, nickname, avatar, gender, birthday, signature, province, city, area, completed_info
     </sql>
 
     <!-- 根据手机号查询用户 -->
@@ -28,7 +28,15 @@
         <include refid="ALL_COLUMN"/>
         from
         <include refid="TABLE_NAME"/>
-        where phone = ${phone}
+        where phone = #{phone}
+    </select>
+
+    <select id="queryUserByUserId" resultType="User" parameterType="Long">
+        select
+        <include refid="ALL_COLUMN" />
+        from
+        <include refid="TABLE_NAME" />
+        where user_id = #{user_id}
     </select>
 
     <!-- 注册用户 -->
@@ -41,4 +49,21 @@
         values
         (#{phone})
     </insert>
+
+    <update id="completeInfo" parameterType="User">
+        update
+        <include refid="TABLE_NAME" />
+        <set>
+            <if test="nickname != null">nickname=#{nickname},</if>
+            <if test="avatar != null">avatar=#{avatar},</if>
+            <if test="gender != 0">gender=#{gender},</if>
+            birthday=#{birthday},
+            province=#{province},
+            city=#{city},
+            area=#{area},
+            signature=#{signature},
+            completed_info=1
+        </set>
+        where user_id = #{userId}
+    </update>
 </mapper>

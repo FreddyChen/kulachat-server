@@ -1,5 +1,6 @@
 package com.freddy.kulachat.core.interceptor;
 
+import com.freddy.kulachat.core.auth.RequestUser;
 import com.freddy.kulachat.core.auth.annotation.AuthTokenAnnotation;
 import com.freddy.kulachat.core.auth.utils.JWTUtil;
 import com.freddy.kulachat.core.config.NetworkConfig;
@@ -72,6 +73,8 @@ public class RequestInterceptor implements HandlerInterceptor {
                     return false;
                 }
 
+                RequestUser requestUser = new RequestUser(userId, token);
+                request.getSession().setAttribute(RequestUser.KEY_REQUEST_USER, requestUser);
                 // token续期
                 redisTemplateService.expire(redisTokenKey, JWTUtil.EXPIRE_TIME, TimeUnit.MILLISECONDS);
                 return true;

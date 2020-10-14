@@ -19,7 +19,8 @@ public enum RetCode {
     TOKEN_IS_EMPTY(2001, "token为空"),
     USER_DOES_NOT_EXIST(2002, "用户不存在"),
     TOKEN_EXPIRED(2003, "token已过期，请重新登录"),
-    TOKEN_INVALID(2004, "token无效，请重新登录");
+    TOKEN_INVALID(2004, "token无效，请重新登录"),
+    GET_OSS_CREDENTIALS_FAILED(3001, "获取oss credentials失败");
 
     private final int code;
     private final String message;

@@ -27,6 +27,8 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-aop:$aop_version"
 	implementation "org.springframework.boot:spring-boot-starter-data-redis:$redis_version"
 	implementation "com.auth0:java-jwt:$jwt_version"
+	implementation "com.aliyun:aliyun-java-sdk-core:$aliyun_core_version"
+	implementation "com.aliyun:aliyun-java-sdk-sts:$aliyun_sts_version"
 	implementation project(':kulachat-common')
 	implementation (project(':kulachat-ims')) {
 		exclude group: 'org.slf4j', module: 'slf4j-api'

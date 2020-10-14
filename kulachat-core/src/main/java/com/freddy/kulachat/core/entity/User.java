@@ -21,7 +21,12 @@ public class User {
     private String signature;
     private String province;
     private String city;
+    private String area;
     private int completedInfo;
+
+    public static final int GENDER_UNKNOWN = 0;
+    public static final int GENDER_MALE = 1;
+    public static final int GENDER_FEMALE = 2;
 
     private static final int IS_COMPLETED_INFO = 1;
     private static final int UN_COMPLETED_INFO = 0;
@@ -98,6 +103,14 @@ public class User {
         this.city = city;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public int getCompletedInfo() {
         return completedInfo;
     }
@@ -126,6 +139,7 @@ public class User {
                 ", signature='" + signature + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
                 ", completedInfo=" + completedInfo +
                 '}';
     }
